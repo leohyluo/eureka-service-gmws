@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "server",
+    "type": "java.lang.String",
+    "description": "A description for 'server'"
+  },
+  {
+    "name": "port",
+    "type": "java.lang.String",
+    "description": "A description for 'port'"
+  },
+  {
+    "name": "fetch-registry",
+    "type": "java.lang.String",
+    "description": "A description for 'fetch-registry'"
+  },
+  {
+    "name": "client",
+    "type": "java.lang.String",
+    "description": "A description for 'client'"
+  },
+  {
+    "name": "register-with-eureka",
+    "type": "java.lang.String",
+    "description": "A description for 'register-with-eureka'"
+  },
+  {
+    "name": "serviceUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'serviceUrl'"
+  },
+  {
+    "name": "defaultZone",
+    "type": "java.lang.String",
+    "description": "A description for 'defaultZone'"
+  }
+]}
