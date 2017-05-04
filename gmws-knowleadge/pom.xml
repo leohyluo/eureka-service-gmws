@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.ebm.gmws</groupId>
-  <artifactId>gmws-knowleadge</artifactId>
+  <artifactId>gmws-knowleadge-disease</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>gmws-knowleadge</name>
+  <name>gmws-knowleadge-disease</name>
   <url>http://maven.apache.org</url>
 
   <parent>

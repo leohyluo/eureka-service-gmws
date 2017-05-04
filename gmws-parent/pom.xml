@@ -10,6 +10,8 @@
   <modules>
     <module>gmws-smartImate</module>
     <module>service-recovery</module>
+    <module>gmws-knowleadge-disease</module>
+    <module>gmws-knowleadge-drug</module>
   </modules>
   
   <parent>
@@ -41,6 +43,11 @@
   		<artifactId>spring-boot-devtools</artifactId>
   	</dependency>
     
+    <!-- 监控health、info -->
+    <dependency>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-actuator</artifactId>
+  	</dependency>
   </dependencies>
   
   <dependencyManagement>

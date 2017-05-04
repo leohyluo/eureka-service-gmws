@@ -1,6 +1,6 @@
 spring:
   application:
-    name: gmws-knowleadge
+    name: gmws-knowleadge-disease
 server:
   port: 9093
 service:  
@@ -11,4 +11,16 @@ service:
 eureka: 
   client:
     serviceUrl:
-      defaultZone: http://${service.register.center.ip}:${service.register.center.port}/eureka/   
+      defaultZone: http://${service.register.center.ip}:${service.register.center.port}/eureka/
+    registry-fetch-interval-seconds: 5 #多久去拉取服务注册信息,默认为30秒
+  instance:
+    lease-renewal-interval-in-seconds: 5 #心跳时间,默认为30秒
+    lease-expiration-duration-in-seconds: 10 #若eureka server在这时间内没收到心跳则移除该instance
+management:
+  port: 19093 #指定healthcheck监控的http端口,如不指定则使用和server相同的端口
+info:
+  name: ${spring.application.name} #与health一样访问
+  spring-boot-version: "@project.parent.parent.version@" #从pom.xml配置文件获取
+  registry-fetch-interval-seconds: ${eureka.client.registry-fetch-interval-seconds}
+  lease-renewal-interval-in-seconds: ${eureka.instance.lease-renewal-interval-in-seconds}
+  lease-expiration-duration-in-seconds: ${eureka.instance.lease-expiration-duration-in-seconds}      

@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class KnowleadgeApp 
+public class Knowleadge4DiseaseApp 
 {
 	
 	@LoadBalanced
@@ -20,6 +20,6 @@ public class KnowleadgeApp
 	
     public static void main( String[] args )
     {
-        SpringApplication.run(KnowleadgeApp.class, args);
+        SpringApplication.run(Knowleadge4DiseaseApp.class, args);
     }
 }
