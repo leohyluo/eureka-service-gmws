@@ -16,8 +16,8 @@ eureka:
   instance:
     lease-renewal-interval-in-seconds: 5 #心跳时间,默认为30秒
     lease-expiration-duration-in-seconds: 10 #若eureka server在这时间内没收到心跳则移除该instance
-management:
-  port: 19093 #指定healthcheck监控的http端口,如不指定则使用和server相同的端口
+<!-- management:
+  port: 19093 #指定healthcheck监控的http端口,如不指定则使用和server相同的端口 -->
 info:
   name: ${spring.application.name} #与health一样访问
   spring-boot-version: "1.4.0.RELEASE" #从pom.xml配置文件获取

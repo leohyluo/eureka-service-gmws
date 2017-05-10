@@ -23,6 +23,10 @@ management:
   health:
     mail:
       enabled: false  #不监控health.mail
+#gmws-knowleadge-disease:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #配置ribbion client的策略(响应时间加权),此种配置方式优先级高于java编程的方式
+    #备注(这种配置方式不成功，原因待查)       
 info:
   name: ${spring.application.name} #与health一样访问
   spring-boot-version: "1.4.0.RELEASE" #从pom.xml配置文件获取

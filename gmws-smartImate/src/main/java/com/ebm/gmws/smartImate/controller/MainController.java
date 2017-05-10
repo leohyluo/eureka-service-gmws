@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.ebm.gmws.smartImate.feign.DiseaseFeign;
+import com.ebm.gmws.smartImate.pojo.disease.Drug;
 import com.ebm.gmws.smartImate.utils.http.HttpUtils;
 
 @RestController
@@ -24,6 +27,8 @@ public class MainController {
 	private RestTemplate restTemplate;
 	@Resource
 	private LoadBalancerClient loadBalancerClient;
+	@Autowired
+	private DiseaseFeign diseaseFeign;
 	
 	@RequestMapping(value = "/search")
 	public String search() {
@@ -46,5 +51,20 @@ public class MainController {
 		System.out.println("invoke client uri : " + url);
 		String result = HttpUtils.sendGet(url, "");
 		return result;
+	}
+	
+	@GetMapping(value = "/test3")
+	public String test3() {
+		return diseaseFeign.getDetail();
+	}
+	
+	@GetMapping(value = "/test4")
+	public Drug test4(Drug drug) {
+		return diseaseFeign.postDrugDetail(drug);
+	}
+	
+	@GetMapping(value = "/test5")
+	public Drug test5(Drug drug) {
+		return diseaseFeign.getDrugDetail(drug);
 	}
 }
