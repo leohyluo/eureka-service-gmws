@@ -7,11 +7,13 @@ service:
   register:
     center:
       ip: 127.0.0.1
-      port: 9090
+      hostname: peer1
+      port: 9081
 eureka: 
   client:
     serviceUrl:
-      defaultZone: http://${service.register.center.ip}:${service.register.center.port}/eureka/
+      #defaultZone: http://${service.register.center.ip}:${service.register.center.port}/eureka/
+      defaultZone: http://${service.register.center.hostname}:${service.register.center.port}/eureka/
     registry-fetch-interval-seconds: 5 #多久去拉取服务注册信息,默认为30秒
   instance:
     lease-renewal-interval-in-seconds: 5 #心跳时间,默认为30秒
