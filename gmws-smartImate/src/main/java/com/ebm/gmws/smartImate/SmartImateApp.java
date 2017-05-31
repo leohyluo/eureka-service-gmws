@@ -2,6 +2,7 @@ package com.ebm.gmws.smartImate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
@@ -15,6 +16,7 @@ import com.ebm.gmws.configuration.RibbonConfig;
 @EnableDiscoveryClient
 @RibbonClient(name = "gmws-knowleadge-disease", configuration = RibbonConfig.class)
 @EnableFeignClients
+@EnableCircuitBreaker
 public class SmartImateApp 
 {
 	@LoadBalanced

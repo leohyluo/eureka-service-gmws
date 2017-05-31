@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import com.ebm.gmws.smartImate.feign.DiseaseFeign;
 import com.ebm.gmws.smartImate.pojo.disease.Drug;
 import com.ebm.gmws.smartImate.utils.http.HttpUtils;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 @RequestMapping("/smartImate")
@@ -37,9 +38,14 @@ public class MainController {
 	}
 	
 	@GetMapping(value = "/test")
+	@HystrixCommand(fallbackMethod = "testFallback")
 	public String test() {
 		ResponseEntity<String> result = restTemplate.getForEntity("http://gmws-knowleadge-disease/knowleadge/disease/getDetail", String.class);
 		return result.getBody();
+	}
+	
+	public String testFallback() {
+		return "breaker";
 	}
 	
 	@GetMapping(value = "/test2")
