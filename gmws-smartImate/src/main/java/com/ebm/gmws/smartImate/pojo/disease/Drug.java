@@ -8,6 +8,14 @@ public class Drug {
 	private String drugName;
 	private Date createTime;
 	
+	public Drug() {
+		
+	}
+	
+	public Drug(String drugId) {
+		this.drugId = drugId;
+	}
+	
 	public String getDrugId() {
 		return drugId;
 	}

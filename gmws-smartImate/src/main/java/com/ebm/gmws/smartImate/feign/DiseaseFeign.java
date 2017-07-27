@@ -4,13 +4,16 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ebm.gmws.smartImate.feign.hystrix.DiseaseFeignFallback;
+import com.ebm.gmws.smartImate.feign.hystrix.MyHystrixFallbackFactory;
 import com.ebm.gmws.smartImate.pojo.disease.Drug;
 
 /**
  * Spring Cloud应用在启动时，Feign会扫描标有@FeignClient注解的接口，生成代理，并注册到Spring容器中。
  * @author leohyluo
  */
-@FeignClient("gmws-knowleadge-disease")
+//@FeignClient(name = "gmws-knowleadge-disease", fallback = DiseaseFeignFallback.class)
+@FeignClient(name = "gmws-knowleadge-disease", fallbackFactory = MyHystrixFallbackFactory.class)
 public interface DiseaseFeign {
 
 	/**
