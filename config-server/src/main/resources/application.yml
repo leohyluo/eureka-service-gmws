@@ -1,0 +1,19 @@
+#搭建srpingcloud-config server端的时候，配置文件可以用application.yml 或 application.properties
+#但是为什么在config client端却要使用bootstrap.yml或bootstrap.properties呢？
+#因为bootstrap.properties的加载是先于application.properties的。
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/leohyluo/springCloudConfig #配置git仓库地址
+          search-paths: respository #配置仓库路径
+          default-label: master #配置仓库分支
+          username: leohyluo
+          password: lhy123$%^
+server:
+  port: 9071
+
+  

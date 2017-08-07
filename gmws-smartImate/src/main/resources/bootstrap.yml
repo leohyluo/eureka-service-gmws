@@ -1,0 +1,8 @@
+#bootstrap.yml可以理解成系统级别的一些参数配置，bootstrap.properties的加载是先于application.properties
+#这些参数一般是不会变动的,如果配置了bootstrap.yml会作为父对象添加到该application上下文中
+spring:
+  cloud:
+    config:
+      label: master #指明远程仓库的分支
+      profile: dev
+      uri: http://localhost:9071/ #指明配置服务中心地址

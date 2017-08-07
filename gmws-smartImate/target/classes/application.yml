@@ -35,3 +35,9 @@ info:
   registry-fetch-interval-seconds: ${eureka.client.registry-fetch-interval-seconds}
   lease-renewal-interval-in-seconds: ${eureka.instance.lease-renewal-interval-in-seconds}
   lease-expiration-duration-in-seconds: ${eureka.instance.lease-expiration-duration-in-seconds}
+#配置zuul
+zuul:
+  routes:
+    diseaseApp:
+      path: /disease-path/**
+      service-id: gmws-knowleadge-disease   

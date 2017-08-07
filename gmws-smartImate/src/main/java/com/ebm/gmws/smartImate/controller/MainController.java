@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,10 @@ public class MainController {
 	private LoadBalancerClient loadBalancerClient;
 	@Autowired
 	private DiseaseFeign diseaseFeign;
+	
+	//这里读取的是github的配置文件,smart-imate->config-server->github
+	@Value("${eureka.server.port}")
+	private String eurekaPort;
 	
 	@RequestMapping(value = "/search")
 	public String search() {
@@ -59,6 +64,17 @@ public class MainController {
 		return result;
 	}
 	
+	@GetMapping(value = "/test2_1")
+	public String test2_1() {
+		ServiceInstance serviceInstance = this.loadBalancerClient.choose("gmws-knowleadge-drug");
+		String host = serviceInstance.getHost();
+		int port = serviceInstance.getPort();
+		String url = "http://" + host + ":" + port + "/drugApp/getDrugDetail";
+		System.out.println("invoke client uri : " + url);
+		String result = HttpUtils.sendGet(url, "");
+		return result;
+	}
+	
 	@GetMapping(value = "/test3")
 	public String test3() {
 		return diseaseFeign.getDetail();
@@ -72,5 +88,10 @@ public class MainController {
 	@GetMapping(value = "/test5")
 	public Drug test5(Drug drug) {
 		return diseaseFeign.getDrugDetail(drug);
+	}
+	
+	@GetMapping("/showGitInfo")
+	public String showGitInfo(){
+		return eurekaPort;
 	}
 }

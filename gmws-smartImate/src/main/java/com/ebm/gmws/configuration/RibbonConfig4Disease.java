@@ -8,7 +8,7 @@ import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;
 
 @Configuration
-public class RibbonConfig {
+public class RibbonConfig4Disease {
 	
 	/**
 	 * Ribbon负载均衡策略定义
