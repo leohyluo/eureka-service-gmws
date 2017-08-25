@@ -32,6 +32,7 @@ public class MyHystrixFallbackFactory implements FallbackFactory<DiseaseFeign> {
 			@Override
 			public String getDetail() {
 				// TODO Auto-generated method stub
+				System.out.println("执行fallback方法");
 				return "drug not found, pls try again";
 			}
 		};

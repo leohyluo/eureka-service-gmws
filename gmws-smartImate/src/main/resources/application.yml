@@ -15,6 +15,9 @@ eureka:
       defaultZone: http://${service.register.center.hostname}:${service.register.center.port}/eureka/
     registry-fetch-interval-seconds: 5 #拉取服务注册信息时间间隔,默认为30秒
   instance:
+    prefer-ip-address: true
+    #appname: custom_appname
+    hostname: smartImate4Gmws
     metadataMap:
       instanceId: ${spring.application.name}:${random.value}
       lhyserviceName: iebm-gmws-smartImate-service #自定义元数据,不会影响客户端行为      
@@ -35,9 +38,4 @@ info:
   registry-fetch-interval-seconds: ${eureka.client.registry-fetch-interval-seconds}
   lease-renewal-interval-in-seconds: ${eureka.instance.lease-renewal-interval-in-seconds}
   lease-expiration-duration-in-seconds: ${eureka.instance.lease-expiration-duration-in-seconds}
-#配置zuul
-zuul:
-  routes:
-    diseaseApp:
-      path: /disease-path/**
-      service-id: gmws-knowleadge-disease   
+  
