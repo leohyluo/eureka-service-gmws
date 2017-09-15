@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import com.ebm.gmws.smartImate.feign.DiseaseFeign;
 import com.ebm.gmws.smartImate.pojo.disease.Drug;
 import com.ebm.gmws.smartImate.utils.http.HttpUtils;
+import com.ebm.gmws.user.pojo.UserInfo;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
@@ -94,4 +95,13 @@ public class MainController {
 	public String showGitInfo(){
 		return eurekaPort;
 	}
+	
+	@GetMapping("/showUserInfo")
+	public UserInfo showUserInfo() {
+		UserInfo user = new UserInfo();
+		user.setUserId("1000");
+		user.setUserName("yama");
+		return user;
+	}
+	
 }

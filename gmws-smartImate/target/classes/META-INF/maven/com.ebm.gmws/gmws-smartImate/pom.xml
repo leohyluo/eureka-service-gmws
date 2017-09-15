@@ -39,6 +39,12 @@
   		<groupId>org.springframework.cloud</groupId>
   		<artifactId>spring-cloud-starter-config</artifactId>
   	</dependency>
+  	
+  	<dependency>
+  		<groupId>com.ebm.gmws</groupId>
+  		<artifactId>gmws-user</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   	  	  
     <dependency>
       <groupId>junit</groupId>

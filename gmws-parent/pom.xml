@@ -8,6 +8,7 @@
   <packaging>pom</packaging>
 
   <modules>
+  	<module>gmws-user</module>
     <module>gmws-smartImate</module>
     <module>service-recovery</module>
     <module>gmws-knowleadge-disease</module>
