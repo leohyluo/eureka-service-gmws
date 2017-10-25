@@ -1,6 +1,12 @@
 spring:
   application:
     name: gmws-knowleadge-disease
+  zipkin:
+    base-url: http://localhost:8050/
+  #zipkin收集默认是0.1的比率，启动完，要多试几次。过段时间就有了。也可以通过spring.sleuth.sampler.percentage=1，加快收集比率  
+  sleuth:
+    sampler:
+      percentage: 1
 server:
   port: 9093
 service:  
@@ -25,4 +31,4 @@ info:
   spring-boot-version: "@project.parent.parent.version@" #从pom.xml配置文件获取
   registry-fetch-interval-seconds: ${eureka.client.registry-fetch-interval-seconds}
   lease-renewal-interval-in-seconds: ${eureka.instance.lease-renewal-interval-in-seconds}
-  lease-expiration-duration-in-seconds: ${eureka.instance.lease-expiration-duration-in-seconds}      
+  lease-expiration-duration-in-seconds: ${eureka.instance.lease-expiration-duration-in-seconds}

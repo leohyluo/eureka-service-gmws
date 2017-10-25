@@ -5,17 +5,20 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.ebm.gmws.smartImate.feign.DiseaseFeign;
+import com.ebm.gmws.smartImate.pojo.Disease;
 import com.ebm.gmws.smartImate.pojo.disease.Drug;
+import com.ebm.gmws.smartImate.service.DiseaseService;
 import com.ebm.gmws.smartImate.utils.http.HttpUtils;
 import com.ebm.gmws.user.pojo.UserInfo;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -32,9 +35,11 @@ public class MainController {
 	private LoadBalancerClient loadBalancerClient;
 	@Autowired
 	private DiseaseFeign diseaseFeign;
+	@Resource
+	private DiseaseService diseaseService;
 	
 	//这里读取的是github的配置文件,smart-imate->config-server->github
-	@Value("${eureka.server.port}")
+//	@Value("${eureka.server.port}")
 	private String eurekaPort;
 	
 	@RequestMapping(value = "/search")
@@ -104,4 +109,22 @@ public class MainController {
 		return user;
 	}
 	
+	@PostMapping("/showDisease")
+	public String showDisease(Disease disease) {
+		String str = "diseaseCode="+disease.getDiseaseCode()+",diseaseName="+disease.getDiseaseName();
+		return str;
+	}
+	
+	@PostMapping("/showDisease2")
+	public String showDisease2(String diseaseCode, String diseaseName) {
+		System.out.println("diseaseCode="+diseaseCode+",diseaseName="+diseaseName);
+		return "success";
+	}
+
+	@Async
+	@GetMapping("/testAsync")
+	public String testAsync() {
+		String result = diseaseService.getDetail();
+		return "response=============";
+	}
 }

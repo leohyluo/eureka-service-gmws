@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: zipkin-server
+server:
+  port: 8050
+service:  
+  register:
+    center:
+      ip: 127.0.0.1
+      hostname: peer1
+      port: 9081
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${service.register.center.hostname}:${service.register.center.port}/eureka/
+    registry-fetch-interval-seconds: 5 #拉取服务注册信息时间间隔,默认为30秒      

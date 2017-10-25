@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "service.register.center.ip",
+    "type": "java.lang.String",
+    "description": "A description for 'service.register.center.ip'"
+  },
+  {
+    "name": "eureka.client.service-url.default-zone",
+    "type": "java.lang.String",
+    "description": "A description for 'eureka.client.service-url.default-zone'"
+  },
+  {
+    "name": "eureka.client.registry-fetch-interval-seconds",
+    "type": "java.lang.String",
+    "description": "A description for 'eureka.client.registry-fetch-interval-seconds'"
+  },
+  {
+    "name": "service.register.center.hostname",
+    "type": "java.lang.String",
+    "description": "A description for 'service.register.center.hostname'"
+  },
+  {
+    "name": "service.register.center.port",
+    "type": "java.lang.String",
+    "description": "A description for 'service.register.center.port'"
+  }
+]}

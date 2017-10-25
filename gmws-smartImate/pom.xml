@@ -18,32 +18,39 @@
 
 
   <dependencies>
-  
+  	
   	<dependency>
   		<groupId>org.springframework.cloud</groupId>
-  		<artifactId>spring-cloud-starter-eureka</artifactId>
-  		<version>1.3.0.RELEASE</version>
+  		<artifactId>spring-cloud-sleuth-zipkin</artifactId>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.springframework.cloud</groupId>
-  		<artifactId>spring-cloud-starter-feign</artifactId>
-  	</dependency>
-  	
-  	<dependency>
-  		<groupId>org.springframework.cloud</groupId>
-  		<artifactId>spring-cloud-starter-hystrix</artifactId>
-  	</dependency>
-  	
-  	<dependency>
-  		<groupId>org.springframework.cloud</groupId>
-  		<artifactId>spring-cloud-starter-config</artifactId>
+  		<artifactId>spring-cloud-starter-zipkin</artifactId>
   	</dependency>
   	
   	<dependency>
   		<groupId>com.ebm.gmws</groupId>
   		<artifactId>gmws-user</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>com.ebm.gmws</groupId>
+  		<artifactId>gmws-common-config</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>com.ebm.gmws</groupId>
+  		<artifactId>fw-common-core</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>com.ebm.gmws</groupId>
+	  	<artifactId>gmws-pojo</artifactId>
+	  	<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	  	  
     <dependency>

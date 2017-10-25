@@ -1,6 +1,15 @@
 spring:
   application: 
-    name: smart-imate  
+    name: smart-imate
+  #配置zipkin server地址    
+  #zipkin:
+  #  base-url: http://localhost:8050/
+  #zipkin收集默认是0.1的比率，启动完，要多试几次。过段时间就有了。也可以通过spring.sleuth.sampler.percentage=1，加快收集比率  
+  #sleuth:
+  #  sampler:
+  #    percentage: 1
+  profiles:
+    active: local
 server:
   port: 9092
 service:  
@@ -13,7 +22,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://${service.register.center.hostname}:${service.register.center.port}/eureka/
-    registry-fetch-interval-seconds: 5 #拉取服务注册信息时间间隔,默认为30秒
+    registry-fetch-interval-seconds: 30 #拉取服务注册信息时间间隔,默认为30秒
   instance:
     prefer-ip-address: true
     #appname: custom_appname
@@ -34,8 +43,7 @@ management:
     #备注(这种配置方式不成功，原因待查)       
 info:
   name: ${spring.application.name} #与health一样访问
-  spring-boot-version: "1.4.0.RELEASE" #从pom.xml配置文件获取
+  spring-boot-version: "1.5.7.RELEASE" #从pom.xml配置文件获取
   registry-fetch-interval-seconds: ${eureka.client.registry-fetch-interval-seconds}
   lease-renewal-interval-in-seconds: ${eureka.instance.lease-renewal-interval-in-seconds}
   lease-expiration-duration-in-seconds: ${eureka.instance.lease-expiration-duration-in-seconds}
-  

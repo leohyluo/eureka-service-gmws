@@ -15,12 +15,16 @@
     <module>gmws-knowleadge-drug</module>
     <module>config-server</module>
     <module>gmws-zuul</module>
+    <module>zipkin-server</module>
+    <module>gmws-common-config</module>
+    <module>fw-common-core</module>
+    <module>gmws-pojo</module>
   </modules>
   
   <parent>
   	<groupId>org.springframework.boot</groupId>
   	<artifactId>spring-boot-starter-parent</artifactId>
-  	<version>1.4.0.RELEASE</version>
+  	<version>1.5.7.RELEASE</version>
   </parent>
 
   <properties>
@@ -30,10 +34,6 @@
   </properties>
 
   <dependencies>
-  	<dependency>
-  		<groupId>org.springframework.boot</groupId>
-  		<artifactId>spring-boot-starter-web</artifactId>
-  	</dependency>
   	
   	<dependency>
   		<groupId>org.springframework.boot</groupId>
@@ -55,13 +55,6 @@
   
   <dependencyManagement>
     <dependencies>
-	    <!-- <dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-dependencies</artifactId>
-		    <version>Brixton.RELEASE</version>
-		    <type>pom</type>
-		    <scope>import</scope>
-		</dependency> -->
 		<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-dependencies</artifactId>
@@ -71,4 +64,13 @@
         </dependency>
     </dependencies>
 	</dependencyManagement>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

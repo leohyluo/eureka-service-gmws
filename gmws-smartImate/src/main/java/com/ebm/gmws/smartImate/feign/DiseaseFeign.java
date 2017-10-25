@@ -4,7 +4,6 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ebm.gmws.smartImate.feign.hystrix.DiseaseFeignFallback;
 import com.ebm.gmws.smartImate.feign.hystrix.MyHystrixFallbackFactory;
 import com.ebm.gmws.smartImate.pojo.disease.Drug;
 
@@ -13,7 +12,7 @@ import com.ebm.gmws.smartImate.pojo.disease.Drug;
  * @author leohyluo
  */
 //@FeignClient(name = "gmws-knowleadge-disease", fallback = DiseaseFeignFallback.class)
-@FeignClient(name = "gmws-knowleadge-disease", fallbackFactory = MyHystrixFallbackFactory.class)
+@FeignClient(name = "gmws-knowleadge-disease", configuration = FeignConfiguration.class, fallbackFactory = MyHystrixFallbackFactory.class)
 public interface DiseaseFeign {
 
 	/**
