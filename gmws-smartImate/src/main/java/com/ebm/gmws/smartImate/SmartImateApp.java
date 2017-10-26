@@ -1,5 +1,6 @@
 package com.ebm.gmws.smartImate;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClients;
@@ -15,6 +16,7 @@ import com.ebm.gmws.outer.configuration.RibbonConfig4Disease;
 @SpringCloudApplicationStarter
 @RibbonClients(defaultConfiguration={RibbonConfig4Disease.class})
 @EnableAsync
+@MapperScan(basePackages = {"com.ebm.gmws.smartImate.mapper"})
 @ComponentScan(basePackages = {"com.ebm.gmws.smartImate","com.ebm.gmws.common.config"})
 public class SmartImateApp 
 {

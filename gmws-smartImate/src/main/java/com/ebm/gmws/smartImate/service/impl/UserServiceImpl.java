@@ -8,10 +8,12 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ebm.gmws.pojo.domain.User;
+import com.ebm.gmws.smartImate.mapper.UserMapper;
 import com.ebm.gmws.smartImate.service.UserService;
-import com.ebm.gmws.user.mapper.UserMapper;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,7 +22,11 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void update(User user) {
+		if(user.getId().longValue() == 6) {
+			System.out.println(1/0);
+		}
 		userMapper.update(user);
 	}
 
@@ -37,6 +43,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public void update(List<User> userList) {
 		userList.forEach(this::update);
 	}

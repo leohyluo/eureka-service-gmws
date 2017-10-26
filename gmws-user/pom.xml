@@ -42,6 +42,12 @@
   	
   	<dependency>
   		<groupId>com.ebm.gmws</groupId>
+  		<artifactId>gmws-common-config</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>com.ebm.gmws</groupId>
 		<artifactId>gmws-pojo</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
   	</dependency>

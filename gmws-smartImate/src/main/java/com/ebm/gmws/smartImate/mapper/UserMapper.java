@@ -1,7 +1,9 @@
-package com.ebm.gmws.user.mapper;
+package com.ebm.gmws.smartImate.mapper;
 
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
 
 import com.ebm.gmws.pojo.domain.User;
 
