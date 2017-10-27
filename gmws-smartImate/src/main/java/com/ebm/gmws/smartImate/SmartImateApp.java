@@ -17,7 +17,7 @@ import com.ebm.gmws.outer.configuration.RibbonConfig4Disease;
 @RibbonClients(defaultConfiguration={RibbonConfig4Disease.class})
 @EnableAsync
 @MapperScan(basePackages = {"com.ebm.gmws.smartImate.mapper"})
-@ComponentScan(basePackages = {"com.ebm.gmws.smartImate","com.ebm.gmws.common.config"})
+@ComponentScan(basePackages = {"com.ebm.gmws.smartImate","com.ebm.gmws.common.config","com.ebm.gmws.fw.common.core"})
 public class SmartImateApp 
 {
 	@LoadBalanced

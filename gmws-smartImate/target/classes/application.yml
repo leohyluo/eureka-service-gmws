@@ -47,3 +47,5 @@ info:
   registry-fetch-interval-seconds: ${eureka.client.registry-fetch-interval-seconds}
   lease-renewal-interval-in-seconds: ${eureka.instance.lease-renewal-interval-in-seconds}
   lease-expiration-duration-in-seconds: ${eureka.instance.lease-expiration-duration-in-seconds}
+logging:
+  config: classpath:logback-smart-imate.xml    

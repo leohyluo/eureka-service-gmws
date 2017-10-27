@@ -2,11 +2,12 @@ package com.ebm.gmws.smartImate.service;
 
 import java.util.List;
 
+import com.ebm.gmws.fw.common.core.service.IService;
 import com.ebm.gmws.pojo.domain.User;
 
-public interface UserService {
+public interface UserService extends IService {
 
-	void update(User user);
+	void updateSingle(User user);
 	
 	User queryById(Long id);
 	

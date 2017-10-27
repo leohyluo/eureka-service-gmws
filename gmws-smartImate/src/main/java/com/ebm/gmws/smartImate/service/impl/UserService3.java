@@ -14,17 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ebm.gmws.pojo.domain.User;
 import com.ebm.gmws.smartImate.mapper.UserMapper;
 import com.ebm.gmws.smartImate.service.UserService;
+import com.ebm.gmws.smartImate.service.UserService2;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserService3  {
 
 	@Resource
 	private UserMapper userMapper;
 	
-	private UserService userService;
-	
-	@Override
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void updateSingle(User user) {
 		if(user.getId().longValue() == 6) {
 			System.out.println(1/0);
@@ -32,7 +30,6 @@ public class UserServiceImpl implements UserService {
 		userMapper.update(user);
 	}
 
-	@Override
 	public User queryById(Long id) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("id", id);
@@ -44,15 +41,8 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-	@Override
 	@Transactional
 	public void update(List<User> userList) {
-		//userList.forEach(this::updateSingle);
-		userList.forEach(this.userService::updateSingle);
-	}
-
-	@Override
-	public void setProxyObj(Object obj) {
-		this.userService = (UserService) obj;
+		userList.forEach(this::updateSingle);
 	}
 }
