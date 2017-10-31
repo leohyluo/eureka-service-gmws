@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ebm.gmws.smartImate.mapper.MainSymptomMapper">
+	<resultMap type="com.ebm.gmws.pojo.diagnosis.MainSymptom" id="baseResult">
+		<id property="id" column="id_" jdbcType="BIGINT"/>
+		<result property="name" column="name_" jdbcType="VARCHAR"/>
+		<result property="requiredNum" column="required_num_" jdbcType="INTEGER"/>
+		<result property="totalQuestion" column="Total_question_" jdbcType="INTEGER"/>
+		<result property="order_" column="order_" jdbcType="INTEGER"/>
+		<result property="sex" column="sex_" jdbcType="INTEGER"/>
+		<result property="symbol" column="symbol_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<select id="list" resultMap="baseResult" parameterType="HashMap">
+		select * from EBM_A_MAIN_SYMPTOM
+	</select>
+</mapper>

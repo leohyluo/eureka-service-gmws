@@ -31,12 +31,17 @@ public class UserServiceImpl implements UserService {
 		}
 		userMapper.update(user);
 	}
+	
+	@Override
+	public void updateWihtoutTx(List<User> userList) {
+		userList.forEach(this::updateSingle);
+	}
 
 	@Override
 	public User queryById(Long id) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("id", id);
-		List<User> userList = userMapper.listUser(param);
+		List<User> userList = userMapper.list(param);
 		User user = null;
 		if(CollectionUtils.isNotEmpty(userList)) {
 			user = userList.get(0);
@@ -55,4 +60,6 @@ public class UserServiceImpl implements UserService {
 	public void setProxyObj(Object obj) {
 		this.userService = (UserService) obj;
 	}
+
+	
 }

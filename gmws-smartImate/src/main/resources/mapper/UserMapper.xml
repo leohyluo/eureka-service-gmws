@@ -9,7 +9,7 @@
 		<result property="sex" column="sex" jdbcType="VARCHAR"/>
 	</resultMap>
 	
-	<select id="listUser" resultMap="baseResult" parameterType="HashMap">
+	<select id="list" resultMap="baseResult" parameterType="HashMap">
 		select id,uname,pwd,name,sex from users
 		<where>
 			<if test="id != null">

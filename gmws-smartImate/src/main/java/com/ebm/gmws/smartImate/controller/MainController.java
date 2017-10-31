@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.ebm.gmws.smartImate.feign.DiseaseFeign;
-import com.ebm.gmws.smartImate.pojo.Disease;
-import com.ebm.gmws.smartImate.pojo.disease.Drug;
+import com.ebm.gmws.pojo.domain.Disease;
+import com.ebm.gmws.pojo.domain.Drug;
+import com.ebm.gmws.rpc.disease.DiseaseFeign;
 import com.ebm.gmws.smartImate.service.DiseaseService;
 import com.ebm.gmws.smartImate.utils.http.HttpUtils;
 import com.ebm.gmws.user.pojo.UserInfo;

@@ -12,4 +12,6 @@ public interface UserService extends IService {
 	User queryById(Long id);
 	
 	void update(List<User> userList);
+	
+	void updateWihtoutTx(List<User> userList);
 }

@@ -28,7 +28,7 @@
   		<groupId>org.springframework.cloud</groupId>
   		<artifactId>spring-cloud-starter-zipkin</artifactId>
   	</dependency>
-  	
+  	  	
   	<dependency>
   		<groupId>com.ebm.gmws</groupId>
   		<artifactId>gmws-user</artifactId>
@@ -49,7 +49,7 @@
   	
   	<dependency>
   		<groupId>com.ebm.gmws</groupId>
-	  	<artifactId>gmws-pojo</artifactId>
+	  	<artifactId>gmws-rpc</artifactId>
 	  	<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	  	  
