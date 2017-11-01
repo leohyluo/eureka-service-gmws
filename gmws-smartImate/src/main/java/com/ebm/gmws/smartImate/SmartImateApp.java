@@ -2,6 +2,7 @@ package com.ebm.gmws.smartImate;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.ribbon.RibbonClients;
@@ -15,6 +16,7 @@ import com.ebm.gmws.outer.configuration.RibbonConfig4Disease;
 
 @SpringCloudApplicationStarter
 @RibbonClients(defaultConfiguration={RibbonConfig4Disease.class})
+@ServletComponentScan
 @EnableFeignClients(basePackages = {"com.ebm.gmws.rpc.disease"})
 @MapperScan(basePackages = {"com.ebm.gmws.smartImate.mapper"})
 @ComponentScan(basePackages = {"com.ebm.gmws.smartImate","com.ebm.gmws.common.config","com.ebm.gmws.rpc","com.ebm.gmws.fw.common.core"})

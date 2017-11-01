@@ -1,7 +1,11 @@
 package com.ebm.gmws.pojo.diagnosis;
 
-public class MainSymptom  {
+import java.io.Serializable;
+
+public class MainSymptom implements Serializable {
 	
+	private static final long serialVersionUID = 4028643608284209547L;
+
 	private Long id;
 	
 	private String name;
