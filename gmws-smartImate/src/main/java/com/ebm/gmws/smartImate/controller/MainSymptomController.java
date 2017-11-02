@@ -25,7 +25,7 @@ public class MainSymptomController {
 
 	@GetMapping("/list")
 	public List<MainSymptom> list() {
-		List<MainSymptom> list = redisService.getList(RedisKeys.MAIN_SYMPTOM_ALL.getValue(), 1, 2);
+		List<MainSymptom> list = redisService.lrange(RedisKeys.MAIN_SYMPTOM_ALL.getValue(), 1, 2);
 		return list;
 	}
 	

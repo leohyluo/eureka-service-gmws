@@ -1,8 +1,12 @@
 package com.ebm.gmws.common.config.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +27,7 @@ public class RedisServiceImpl implements IRedisService {
     private RedisTemplate<String, ?> redisTemplate;  
       
     @Override  
-    public boolean setString(final String key, final String value) {  
+    public Boolean setString(final String key, final String value) {  
         boolean result = redisTemplate.execute(connection->{
         	RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
         	connection.set(stringSerializer.serialize(key), stringSerializer.serialize(value));
@@ -43,7 +47,7 @@ public class RedisServiceImpl implements IRedisService {
     }  
   
     @Override  
-    public boolean expire(final String key, long expire) {  
+    public Boolean expire(final String key, long expire) {  
         return redisTemplate.expire(key, expire, TimeUnit.SECONDS);  
     }  
       
@@ -92,7 +96,7 @@ public class RedisServiceImpl implements IRedisService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> List<T> getList(String key, int start, int end) {
+	public <T> List<T> lrange(String key, int start, int end) {
 		List<T> result = redisTemplate.execute(connection -> {
 			List<byte[]> list = connection.lRange(key.getBytes(), start, end);
 			return list.stream().map(SerializationUtils::deserialize).collect(Collectors.toList())
@@ -102,5 +106,83 @@ public class RedisServiceImpl implements IRedisService {
 					}).collect(Collectors.toList());
 		});
 		return result;
+	}
+	
+	@Override
+	public Boolean hset(String key, String field, String value) {
+		return redisTemplate.execute(connection->{
+			RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
+			return connection.hSet(stringSerializer.serialize(key), stringSerializer.serialize(field), stringSerializer.serialize(value));
+		});
+	}
+	
+	@Override
+	public String hget(String key, String field) {
+		return redisTemplate.execute(connection->{
+			RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
+			byte[] data = connection.hGet(stringSerializer.serialize(key), stringSerializer.serialize(field));
+			String value = stringSerializer.deserialize(data);
+			return value;
+		});
+	}
+	
+	@Override
+	public Map<String, String> hgetAll(String key) {
+		return redisTemplate.execute(connection->{
+			RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
+			Map<byte[], byte[]> map = connection.hGetAll(stringSerializer.serialize(key));
+			Map<String, String> result = new HashMap<>();
+			map.forEach((k,v)->{
+				result.put(stringSerializer.deserialize(k), stringSerializer.deserialize(v));
+			});
+			return result;
+		});
+	}
+
+	@Override
+	public long hlen(String key) {
+		return redisTemplate.execute(connection->{
+			RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
+			return connection.hLen(stringSerializer.serialize(key));
+		});
+	}
+
+	@Override
+	public long hdel(String key, String... fields) {
+		return redisTemplate.execute(connection->{			
+			Object[] objArr = Stream.of(fields).map(SerializationUtils::serialize).collect(Collectors.toList()).toArray();
+			byte[][] fieldList = (byte[][]) objArr;
+			RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
+			return connection.hDel(stringSerializer.serialize(key), fieldList);
+		});
+	}
+
+	@Override
+	public long sadd(String key, String member) {
+		return redisTemplate.execute(connection->{
+			RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
+			return connection.sAdd(stringSerializer.serialize(key), stringSerializer.serialize(member));
+		});
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> Set<T> smembers(String key) {
+		return redisTemplate.execute(connection->{
+			Set<byte[]> set = connection.sMembers(SerializationUtils.serialize(key));
+			Set<Object> stringSet = set.stream().map(SerializationUtils::deserialize).collect(Collectors.toSet());
+			Set<T> tset = stringSet.stream().map(e->{
+				T t = (T) e;
+				return t;
+			}).collect(Collectors.toSet());
+			return tset;
+		});
+	}
+
+	@Override
+	public long srem(String key, String member) {
+		return redisTemplate.execute(connection->{
+			return connection.sRem(SerializationUtils.serialize(key), SerializationUtils.serialize(member));
+		});
 	}
 }
