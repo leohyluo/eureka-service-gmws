@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ebm.gmws.common.config.RedisKeys;
-import com.ebm.gmws.common.config.service.IRedisService;
+import com.ebm.gmws.common.config.service.RedisService;
 import com.ebm.gmws.pojo.diagnosis.MainSymptom;
 import com.ebm.gmws.smartImate.service.MainSymptomService;
 
@@ -21,7 +21,7 @@ public class MainSymptomController {
 	private MainSymptomService mainSymptomService;
 	
 	@Resource
-	private IRedisService redisService;
+	private RedisService redisService;
 
 	@GetMapping("/list")
 	public List<MainSymptom> list() {

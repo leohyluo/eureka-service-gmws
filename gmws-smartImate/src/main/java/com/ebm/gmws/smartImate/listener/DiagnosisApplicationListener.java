@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ebm.gmws.common.config.RedisKeys;
-import com.ebm.gmws.common.config.service.IRedisService;
+import com.ebm.gmws.common.config.service.RedisService;
 import com.ebm.gmws.pojo.diagnosis.MainSymptom;
 import com.ebm.gmws.smartImate.service.MainSymptomService;
 
@@ -25,7 +25,7 @@ public class DiagnosisApplicationListener implements ServletContextListener {
 	@Resource
 	private MainSymptomService mainSymptomService;
 	@Resource
-	private IRedisService redisService;
+	private RedisService redisService;
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {

@@ -6,9 +6,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ebm.gmws.fw.common.core.web.utils.ResponseMessage;
+import com.ebm.gmws.fw.common.core.web.utils.WebUtils;
 import com.ebm.gmws.pojo.domain.User;
 import com.ebm.gmws.smartImate.service.UserService;
 
@@ -46,5 +49,12 @@ public class UserController {
 		userList.add(user2);
 		userService.updateWihtoutTx(userList);
 		return "update success";
+	}
+	
+	@PostMapping("/save")
+	public ResponseMessage save(User user) {
+		System.out.println(user.getName());
+		ResponseMessage result = WebUtils.buildSuccessResponseMessage(user.getName());
+		return result;
 	}
 }

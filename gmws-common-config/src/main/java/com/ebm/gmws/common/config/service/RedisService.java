@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public interface IRedisService {  
+public interface RedisService {  
     
     Boolean setString(String key, String value);  
       
@@ -107,4 +107,10 @@ public interface IRedisService {
      * @return
      */
     long zremrangebyscore(String key, double min, double max);
+    
+    long removeCompanyData(String companyId);
+    
+    String putCompany(String companyId);
+    
+    void delCompany(String companyId);
 }

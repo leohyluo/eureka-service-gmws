@@ -1,5 +1,6 @@
 package com.ebm.gmws.common.config.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,15 +12,18 @@ import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
 import org.springframework.util.SerializationUtils;
 
-import com.ebm.gmws.common.config.service.IRedisService;
+import com.ebm.gmws.common.config.service.RedisService;
 
 @Service
-public class RedisServiceImpl implements IRedisService {
+public class RedisServiceImpl implements RedisService {
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -184,5 +188,104 @@ public class RedisServiceImpl implements IRedisService {
 		return redisTemplate.execute(connection->{
 			return connection.sRem(SerializationUtils.serialize(key), SerializationUtils.serialize(member));
 		});
+	}
+
+	@Override
+	public long zadd(String key, double score, String member) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int zcount(String key, double min, double max) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public <T> List<T> zrange(String key, int firstIndex, int lastIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T> List<T> zrangebyscore(String key, double min, double max) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String zrank(String key, String member) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long zrem(String key, String member) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long zremrangebyrank(String key, int firstIndex, int lastIndex) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long zremrangebyscore(String key, double min, double max) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public long removeCompanyData(String companyId) {
+		String key = "company-" + companyId + "*";
+		logger.info("key is {}", key);
+		RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
+		Set<String> companyKeys = redisTemplate.execute(connection->{
+			Set<byte[]> set = connection.keys(key.getBytes());
+			Set<Object> companyallKey4Obj = set.stream().map(e->serializer.deserialize(e)).collect(Collectors.toSet());
+			Set<String> companyallKey = companyallKey4Obj.stream().map(e->e.toString()).collect(Collectors.toSet());
+			return companyallKey;
+		});
+		Map<DataType, List<String>> map = redisTemplate.execute(connection->{
+			Map<DataType, List<String>> result = new HashMap<>();
+			companyKeys.forEach(e->{
+				DataType type = connection.type(e.getBytes());
+				if(result.containsKey(type)) {
+					result.get(type).add(e);
+				} else {
+					List<String> list = new ArrayList<>();
+					list.add(e);
+					result.put(type, list);
+				}
+			});
+			return result;
+		});
+		map.forEach((k,v)->{
+			redisTemplate.execute(connection->{
+				byte[][] arr = new byte[0][v.size()];
+				arr = v.stream().map(SerializationUtils::serialize).collect(Collectors.toList()).toArray(arr);
+				if(k == DataType.STRING) {
+					connection.del(arr);
+				} else if(k == DataType.LIST) {
+					//connection.lRem(key, count, value);
+				} 
+				return null;
+			});
+		});
+		return 0;
+	}
+	
+	@Cacheable(value = "'company'+#companyId")
+	public String putCompany(String companyId) {
+		System.out.println("put company start");
+		return "ok";
+	}
+	
+	@CacheEvict(value = "'company'+#companyId", allEntries = true)
+	public void delCompany(String companyId) {
+		System.out.println("del company start");
 	}
 }

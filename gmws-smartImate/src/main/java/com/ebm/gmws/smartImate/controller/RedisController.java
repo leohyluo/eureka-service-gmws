@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ebm.gmws.common.config.service.IRedisService;
+import com.ebm.gmws.common.config.service.RedisService;
 
 @RestController
 @RequestMapping("/redis")
 public class RedisController {
 	
 	@Resource
-	private IRedisService redisService;
+	private RedisService redisService;
 
 	@GetMapping("/hset")
 	public String hpush() {
@@ -43,5 +43,23 @@ public class RedisController {
 	public Map<String, String> hgetall() {
 		String key = "dbInfo";
 		return redisService.hgetAll(key);
+	}
+	
+	@GetMapping("/delCompanyCache/{companyId}")
+	public String delCompanyCache(@PathVariable String companyId) {
+		redisService.removeCompanyData(companyId);
+		return "success";
+	}
+	
+	@GetMapping("/putCompany/{companyId}")
+	public String putCompany(@PathVariable String companyId){
+		String result = redisService.putCompany(companyId);
+		return result;
+	}
+	
+	@GetMapping("/delCompany/{companyId}")
+	public String delCompany(@PathVariable String companyId){
+		redisService.delCompany(companyId);
+		return "del success";
 	}
 }
