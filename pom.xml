@@ -55,23 +55,105 @@
   </dependencies>
   
   <dependencyManagement>
-    <dependencies>
+	<dependencies>
 		<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-dependencies</artifactId>
-            <version>Camden.SR7</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-	</dependencyManagement>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dependencies</artifactId>
+			<version>Camden.SR7</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+	</dependencies>
+  </dependencyManagement>
+    
+ 
+
+	<!-- 多环境配置 -->
+	<profiles>
+		<!-- local -->
+		<profile>
+			<id>local</id>
+			<properties>
+				<env>local</env>
+				<maven.test.skip>true</maven.test.skip>
+				<!-- 默认配置 -->
+				<activeByDefault>true</activeByDefault>
+			</properties>
+		</profile>
+		<!-- dev -->
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>dev</env>
+				<maven.test.skip>true</maven.test.skip>
+			</properties>
+		</profile>
+		<!-- test -->
+		<profile>
+			<id>test</id>
+			<properties>
+				<env>test</env>
+				<maven.test.skip>true</maven.test.skip>
+			</properties>
+		</profile>
+		<!-- prod -->
+		<profile>
+			<id>prod</id>
+			<properties>
+				<env>prod</env>
+				<maven.test.skip>true</maven.test.skip>
+			</properties>
+		</profile>
+	</profiles>  
 	
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>copy-dependencies</id>
+							<phase>prepare-package</phase>
+							<goals>
+								<goal>copy-dependencies</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.build.directory}/lib</outputDirectory>
+								<overWriteReleases>false</overWriteReleases>
+								<overWriteSnapshots>false</overWriteSnapshots>
+								<overWriteIfNewer>true</overWriteIfNewer>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<configuration>
+						<archive>
+							<manifest>
+								<addClasspath>true</addClasspath>
+								<classpathPrefix>lib/</classpathPrefix>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	
+	<!-- <build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-	</build>
+	</build> -->
 </project>

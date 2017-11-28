@@ -35,4 +35,82 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <build>
+  	<finalName>gmws-knowleadge-disease</finalName>
+  	<resources>
+  		<resource>
+  			<targetPath>${project.build.directory}/classes</targetPath>
+  			<!-- 配置资源文件位置 -->
+  			<directory>src/main/resources</directory>
+  			<filtering>true</filtering>
+  			<includes>
+  				<include>**/*.xml</include>
+  				<include>**/*.yml</include>
+  				<include>**/*.properties</include>
+  			</includes>
+  		</resource>
+  		<resource>
+  			<targetPath>${project.build.directory}/classes/META-INF</targetPath>
+  			<directory>src/main/resources</directory>
+  			<filtering>true</filtering>
+  			<includes>
+  				<include>application.yml</include>
+  			</includes>
+  		</resource>
+  	</resources>
+
+	<!-- <plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-dependency-plugin</artifactId>
+			<executions>
+				<execution>
+					<id>copy-dependencies</id>
+					<phase>prepare-package</phase>
+					<goals>
+						<goal>copy-dependencies</goal>
+					</goals>
+					<configuration>
+						<outputDirectory>${project.build.directory}/lib</outputDirectory>
+						<overWriteReleases>false</overWriteReleases>
+						<overWriteSnapshots>false</overWriteSnapshots>
+						<overWriteIfNewer>true</overWriteIfNewer>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-jar-plugin</artifactId>
+			<configuration>
+				<archive>
+					<manifest>
+						<addClasspath>true</addClasspath>
+						<classpathPrefix>lib/</classpathPrefix>
+						<mainClass>com.ebm.gmws.knowleadge.Knowleadge4DiseaseApp</mainClass>
+					</manifest>
+				</archive>
+			</configuration>
+		</plugin>
+	</plugins> -->
+  
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-dependency-plugin</artifactId>
+  		</plugin>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-jar-plugin</artifactId>
+			<configuration>
+				<archive>
+					<manifest>
+						<mainClass>com.ebm.gmws.knowleadge.Knowleadge4DiseaseApp</mainClass>
+					</manifest>
+				</archive>
+			</configuration>
+  		</plugin>
+  	</plugins>
+  </build>
 </project>

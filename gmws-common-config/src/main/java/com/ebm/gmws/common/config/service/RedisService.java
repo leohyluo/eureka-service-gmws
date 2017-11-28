@@ -110,7 +110,7 @@ public interface RedisService {
     
     long removeCompanyData(String companyId);
     
-    String putCompany(String companyId);
+    String putCompany(Integer companyId);
     
-    void delCompany(String companyId);
+    void delCompany(Integer companyId);
 }

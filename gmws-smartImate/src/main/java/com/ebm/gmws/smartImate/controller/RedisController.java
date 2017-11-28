@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ebm.gmws.common.config.service.RedisService;
+import com.ebm.gmws.common.config.service.impl.CacheServiceImpl;
 
 @RestController
 @RequestMapping("/redis")
@@ -18,6 +19,8 @@ public class RedisController {
 	
 	@Resource
 	private RedisService redisService;
+	@Resource
+	private CacheServiceImpl cacheServiceImpl;
 
 	@GetMapping("/hset")
 	public String hpush() {
@@ -52,14 +55,26 @@ public class RedisController {
 	}
 	
 	@GetMapping("/putCompany/{companyId}")
-	public String putCompany(@PathVariable String companyId){
+	public String putCompany(@PathVariable Integer companyId){
 		String result = redisService.putCompany(companyId);
 		return result;
 	}
 	
 	@GetMapping("/delCompany/{companyId}")
-	public String delCompany(@PathVariable String companyId){
+	public String delCompany(@PathVariable Integer companyId){
 		redisService.delCompany(companyId);
+		return "del success";
+	}
+	
+	@GetMapping("/putCompany2/{companyId}")
+	public String putCompany2(@PathVariable Integer companyId){
+		String result = cacheServiceImpl.putCompany(companyId);
+		return result;
+	}
+	
+	@GetMapping("/delCompany2/{companyId}")
+	public String delCompany2(@PathVariable Integer companyId){
+		cacheServiceImpl.delCompany(companyId);
 		return "del success";
 	}
 }

@@ -4,7 +4,7 @@ package com.ebm.gmws.fw.common.core;
  * Hello world!
  *
  */
-public class App 
+public class CommonCoreApp 
 {
     public static void main( String[] args )
     {

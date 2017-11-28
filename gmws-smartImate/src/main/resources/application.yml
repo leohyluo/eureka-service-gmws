@@ -33,7 +33,7 @@ eureka:
     lease-renewal-interval-in-seconds: 5 #心跳时间,默认为30秒
     lease-expiration-duration-in-seconds: 10 #若eureka server在这时间内没收到心跳则移除该instance,默认为90秒
 management:
-  port: 19092 #指定healthcheck监控的http端口,如不指定则使用和server相同的端口
+  #port: 19092 #指定healthcheck监控的http端口,如不指定则使用和server相同的端口
   health:
     mail:
       enabled: false  #不监控health.mail
