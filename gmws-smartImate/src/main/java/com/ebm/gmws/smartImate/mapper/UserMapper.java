@@ -7,7 +7,7 @@ import com.ebm.gmws.pojo.domain.User;
 
 public interface UserMapper {
 
-	void update(User user);
+	void updateUser(User user);
 	
-	List<User> list(Map<String, Object> param);
+	List<User> listUser(Map<String, Object> param);
 }

@@ -7,5 +7,5 @@ import com.ebm.gmws.pojo.diagnosis.MainSymptom;
 
 public interface MainSymptomMapper {
 
-	List<MainSymptom> list(Map<String, Object> param);
+	List<MainSymptom> listMainSymptom(Map<String, Object> param);
 }

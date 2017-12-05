@@ -19,7 +19,7 @@ public class MainSymptomServiceImpl implements MainSymptomService {
 
 	@Override
 	public List<MainSymptom> list(Map<String, Object> map) {
-		return mapper.list(map);
+		return mapper.listMainSymptom(map);
 	}
 
 }

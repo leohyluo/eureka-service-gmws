@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ebm.gmws.smartImate.mapper.UserMapper">
-	<resultMap id="baseResult" type="com.ebm.gmws.pojo.domain.User">
+	<!-- <resultMap id="baseUser" type="com.ebm.gmws.pojo.domain.User">
 		<id  property="id" column="id" jdbcType="INTEGER"/>
 		<result property="uname" column="uname" jdbcType="VARCHAR"/>
 		<result property="pwd" column="pwd" jdbcType="VARCHAR"/>
 		<result property="name" column="name" jdbcType="VARCHAR"/>
 		<result property="sex" column="sex" jdbcType="VARCHAR"/>
-	</resultMap>
+	</resultMap> -->
 	
-	<select id="list" resultMap="baseResult" parameterType="HashMap">
+	<select id="listUser" resultMap="com.ebm.gmws.smartImate.mapper.UserMapper" parameterType="HashMap">
 		select id,uname,pwd,name,sex from users
 		<where>
 			<if test="id != null">
@@ -18,7 +18,7 @@
 		</where>
 	</select>
 	
-	<update id="update" parameterType="com.ebm.gmws.pojo.domain.User">
+	<update id="updateUser" parameterType="com.ebm.gmws.pojo.domain.User">
 		update users set
 		<if test="uname != null">
 			uname = #{uname},

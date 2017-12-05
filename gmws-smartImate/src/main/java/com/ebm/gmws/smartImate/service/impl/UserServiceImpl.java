@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 		if(user.getId().longValue() == 6) {
 			System.out.println(1/0);
 		}
-		userMapper.update(user);
+		userMapper.updateUser(user);
 	}
 	
 	@Override
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 	public User queryById(Long id) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("id", id);
-		List<User> userList = userMapper.list(param);
+		List<User> userList = userMapper.listUser(param);
 		User user = null;
 		if(CollectionUtils.isNotEmpty(userList)) {
 			user = userList.get(0);
